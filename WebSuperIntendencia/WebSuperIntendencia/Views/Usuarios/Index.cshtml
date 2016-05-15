@@ -23,7 +23,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nombre)
@@ -35,11 +36,14 @@
             @Html.DisplayFor(modelItem => item.TipoDocumento)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+            @Html.ActionLink("Transacciones" , "Usuario" , "Transacciones" , new { id = item.Id } , null )
         </td>
     </tr>
 }
-
 </table>
+@Html.ActionLink("Anterior", "Index", new { pagina = ViewBag.pagina - 1, tamPagina = ViewBag.tamPagina }) | 
+@Html.ActionLink( "Siguiente" , "Index" , new { pagina = ViewBag.pagina + 1 , tamPagina = ViewBag.tamPagina} )
+

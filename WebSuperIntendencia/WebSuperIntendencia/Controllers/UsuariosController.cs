@@ -15,9 +15,20 @@ namespace WebSuperIntendencia.Controllers
     {
         private ProxyUsuario proxyUsuario = new ProxyUsuario();
         // GET: Usuarios
-        public ActionResult Index()
+      /*  public ActionResult Index()
         {
             return View( proxyUsuario.darUsuarios() );
+        }*/
+
+        public ActionResult Index( int pagina = 1 , int tamPagina = 5)
+        {
+            if( pagina <= 0)
+            {
+                pagina = 1;
+            }
+            ViewBag.pagina = pagina;
+            ViewBag.tamPagina = tamPagina;
+            return View(proxyUsuario.darUsuarios(pagina, tamPagina));
         }
 
         // GET: Usuarios/Details/5

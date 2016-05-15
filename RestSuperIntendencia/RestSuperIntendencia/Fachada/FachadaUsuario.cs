@@ -22,7 +22,6 @@ namespace RestSuperIntendencia.Fachada
             return db.Usuarios.Find(id);
         }
 
-
         public IQueryable<Usuario> obtenerUsuarios( int tamPagina = 10 , int pagina  = 0 )
         {
 

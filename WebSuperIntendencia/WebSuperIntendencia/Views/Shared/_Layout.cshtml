@@ -33,7 +33,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Página Principal", "Index", "Home")</li>
                     <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
-                    <li>@Html.ActionLink("Transacciones", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Transacciones", "Index", "Usuarios")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -43,7 +43,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - SuperIntendencia </p>
+            <p>&copy; @DateTime.Now.Year - David Calle, Jeniffer Haker , Carlos Silva, Andrés Tocaruncho </p>
         </footer>
     </div>
 

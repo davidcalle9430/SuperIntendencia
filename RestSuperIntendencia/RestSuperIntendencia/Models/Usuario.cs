@@ -25,6 +25,6 @@ namespace RestSuperIntendencia.Models
         [Index("documento", 2, IsUnique = true)]
         [StringLength( 100 )]
         public string TipoDocumento { get; set; }
-        public virtual List< Transaccion > Transacciones { get; set; }
+        //public virtual List< Transaccion > Transacciones { get; set; }
     }
 }

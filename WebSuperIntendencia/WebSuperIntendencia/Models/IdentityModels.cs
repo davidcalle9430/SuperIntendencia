@@ -23,6 +23,9 @@ namespace WebSuperIntendencia.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer<ApplicationDbContext>(
+               new DropCreateDatabaseIfModelChanges<ApplicationDbContext>()
+           );
         }
 
         public static ApplicationDbContext Create()
@@ -31,5 +34,7 @@ namespace WebSuperIntendencia.Models
         }
 
         public System.Data.Entity.DbSet<WebSuperIntendencia.Models.Usuario> Usuarios { get; set; }
+
+        public System.Data.Entity.DbSet<WebSuperIntendencia.Models.Transaccion> Transaccions { get; set; }
     }
 }

@@ -14,6 +14,8 @@ namespace WebSuperIntendencia.Models
 
         public int UsuarioId { get; set; }
 
+        public DateTime Fecha { get; set; }
+
         public virtual Usuario Usuario { get; set; }
     }
 }

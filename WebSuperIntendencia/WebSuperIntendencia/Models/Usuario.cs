@@ -12,6 +12,8 @@ namespace WebSuperIntendencia.Models
 
         public string NumeroDocumento { get; set; }
         public string TipoDocumento { get; set; }
+
+        public DateTime Fecha { get; set; }
         public virtual List<Transaccion> Transacciones { get; set; }
     }
 }

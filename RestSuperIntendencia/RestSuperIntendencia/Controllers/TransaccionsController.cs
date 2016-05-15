@@ -9,24 +9,35 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using RestSuperIntendencia.Models;
+using RestSuperIntendencia.Fachada;
 
 namespace RestSuperIntendencia.Controllers
 {
+    [RoutePrefix("api/Transaccions")]
     public class TransaccionsController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        //private ApplicationDbContext db = new ApplicationDbContext();
+        private FachadaTransacciones fachada = new FachadaTransacciones();
 
         // GET: api/Transaccions
         public IQueryable<Transaccion> GetTransaccions()
         {
-            return db.Transaccions;
+            return fachada.darTransacciones();
         }
+
+        [HttpGet]
+        [Route("Usuario/{id}")]
+        public IQueryable<Transaccion> darTransaccionesUsuario( int id )
+        {
+            return fachada.darTransaccionesUsuario( id );
+        }
+
 
         // GET: api/Transaccions/5
         [ResponseType(typeof(Transaccion))]
         public IHttpActionResult GetTransaccion(int id)
         {
-            Transaccion transaccion = db.Transaccions.Find(id);
+            Transaccion transaccion = fachada.buscarTransaccion(id);
             if (transaccion == null)
             {
                 return NotFound();
@@ -37,7 +48,7 @@ namespace RestSuperIntendencia.Controllers
 
         // PUT: api/Transaccions/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTransaccion(int id, Transaccion transaccion)
+        public IHttpActionResult PutTransaccion( int id , Transaccion transaccion )
         {
             if (!ModelState.IsValid)
             {
@@ -49,25 +60,14 @@ namespace RestSuperIntendencia.Controllers
                 return BadRequest();
             }
 
-            db.Entry(transaccion).State = EntityState.Modified;
+            var t = fachada.actualizarTransaccion(transaccion);
 
-            try
+            if( t == null)
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TransaccionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest();
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode( HttpStatusCode.OK );
         }
 
         // POST: api/Transaccions
@@ -79,8 +79,7 @@ namespace RestSuperIntendencia.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Transaccions.Add(transaccion);
-            db.SaveChanges();
+            fachada.agregarTransaccion(transaccion);
 
             return CreatedAtRoute("DefaultApi", new { id = transaccion.Id }, transaccion);
         }
@@ -89,18 +88,16 @@ namespace RestSuperIntendencia.Controllers
         [ResponseType(typeof(Transaccion))]
         public IHttpActionResult DeleteTransaccion(int id)
         {
-            Transaccion transaccion = db.Transaccions.Find(id);
+            Transaccion transaccion = fachada.buscarTransaccion( id );
             if (transaccion == null)
             {
                 return NotFound();
             }
 
-            db.Transaccions.Remove(transaccion);
-            db.SaveChanges();
-
+            var res = fachada.eliminarTransaccion(transaccion);
             return Ok(transaccion);
         }
-
+        /*
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -113,6 +110,6 @@ namespace RestSuperIntendencia.Controllers
         private bool TransaccionExists(int id)
         {
             return db.Transaccions.Count(e => e.Id == id) > 0;
-        }
+        }*/
     }
 }

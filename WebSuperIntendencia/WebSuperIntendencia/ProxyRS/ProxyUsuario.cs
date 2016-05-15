@@ -35,6 +35,18 @@ namespace WebSuperIntendencia.ProxyRS
             return null;
         }
 
+
+        public List<Usuario> darUsuarios( int pagina , int tamPagina )
+        {
+            HttpResponseMessage response = client.GetAsync( USUARIOS_PATH + $"?pageIndex={pagina}&pageSize={tamPagina}" ).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var usuarios = response.Content.ReadAsAsync<List<Usuario>>().Result;
+                return usuarios;
+            }
+            return null;
+        }
+
         public  Usuario buscarUsuario( int id)
         {
             HttpResponseMessage response = client.GetAsync(USUARIOS_PATH + id).Result;

@@ -238,6 +238,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TransaccionsController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Fachada\FachadaTransacciones.cs" />
     <Compile Include="Fachada\FachadaUsuario.cs" />
     <Compile Include="Models\Transaccion.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
