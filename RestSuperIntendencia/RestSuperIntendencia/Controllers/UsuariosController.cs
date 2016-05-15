@@ -17,6 +17,14 @@ namespace RestSuperIntendencia.Controllers
             return fachada.darUsuarios();
         }
 
+
+        public IQueryable<Usuario> GetUsuarios( int pageIndex , int pageSize)
+        {
+            return fachada.obtenerUsuarios( pageSize , pageIndex );
+        }
+
+
+
         // GET: api/Usuarios/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult GetUsuario(int id)

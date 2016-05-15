@@ -22,6 +22,23 @@ namespace RestSuperIntendencia.Fachada
             return db.Usuarios.Find(id);
         }
 
+
+        public IQueryable<Usuario> obtenerUsuarios( int tamPagina = 10 , int pagina  = 0 )
+        {
+
+            int aSaltarse = 0;
+            if( pagina <= 0)
+            {
+                pagina = 1;
+            }
+            aSaltarse = ( pagina - 1 ) * tamPagina;
+            var resultado = db.Usuarios
+                            .OrderBy( u => u.Id )
+                            .Skip( aSaltarse )
+                            .Take( tamPagina );
+            return resultado;
+        }
+
         public bool editarUsuario( Usuario usuario)
         {
             db.Entry(usuario).State = EntityState.Modified;
