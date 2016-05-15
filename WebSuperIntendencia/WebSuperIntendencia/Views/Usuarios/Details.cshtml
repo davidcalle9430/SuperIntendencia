@@ -1,0 +1,42 @@
+﻿@model WebSuperIntendencia.Models.Usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2> Detalles del usuario </h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDocumento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDocumento)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a Lista", "Index")
+</p>
